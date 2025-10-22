@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ocena i opinia o samochodzie</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>Ocena i opinia o samochodzie</h1>
+  <p class="sub">Wypełnij formularz: informacje o samochodzie + Twój komentarz. Dane zapisują się w MySQL (autoinstalacja przy pierwszym uruchomieniu).</p>
+
+  <div class="grid">
+    <!-- FORM -->
+    <div class="card">
+      <div class="hd"><strong>Wyślij opinię</strong></div>
+      <div class="bd">
+        <form id="reviewForm">
+          <div class="row">
+            <div style="grid-column:span 6">
+              <label>Marka</label>
+              <input name="make" required placeholder="Np. Toyota" />
+            </div>
+            <div style="grid-column:span 6">
+              <label>Model</label>
+              <input name="model" required placeholder="Np. Corolla" />
+            </div>
+          </div>
+          <div class="row">
+            <div style="grid-column:span 4">
+              <label>Rok</label>
+              <input name="year" type="number" min="1980" max="2099" required />
+            </div>
+            <div style="grid-column:span 4">
+              <label>Rodzaj paliwa</label>
+              <select name="fuel">
+                <option value="petrol">Benzyna</option>
+                <option value="diesel">Diesel</option>
+                <option value="hybrid">Hybryda</option>
+                <option value="electric">Elektryczny</option>
+              </select>
+            </div>
+            <div style="grid-column:span 4">
+              <label>Gdzie używałeś</label>
+              <select name="usage">
+                <option value="owned">Własny samochód</option>
+                <option value="rented">Wynajem</option>
+                <option value="testdrive">Jazda próbna</option>
+                <option value="other">Inne</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="grid-column:span 12">
+              <label>Ocena (1–5)</label>
+              <div class="stars" id="stars" aria-label="Wybierz ocenę">
+                <span class="star" data-v="1">☆</span>
+                <span class="star" data-v="2">☆</span>
+                <span class="star" data-v="3">☆</span>
+                <span class="star" data-v="4">☆</span>
+                <span class="star" data-v="5">☆</span>
+              </div>
+              <input name="rating" id="rating" type="number" min="1" max="5" value="5" hidden />
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="grid-column:span 12">
+              <label>Twój komentarz</label>
+              <textarea name="comment" placeholder="Np.: Brałem w najem na 3 dni..."></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="grid-column:span 6">
+              <label>Imię (opcjonalnie)</label>
+              <input name="author" placeholder="Anonim" />
+            </div>
+            <div style="grid-column:span 6">
+              <label>Data</label>
+              <input name="date" type="date" />
+            </div>
+          </div>
+
+          <div class="btns">
+            <button type="submit">Zapisz opinię</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="card">
+      <div class="hd"><strong>Moje opinie</strong></div>
+      <div class="bd">
+        <div id="list" class="list">
+          <div class="empty">Na razie brak żadnej opinii.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
