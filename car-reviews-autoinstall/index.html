@@ -9,100 +9,39 @@
 <body>
 <div class="wrap">
   <h1>Ocena i opinia o samochodzie</h1>
-  <p class="sub">Wypełnij formularz: informacje o samochodzie + Twój komentarz. Dane zapisują się w MySQL (autoinstalacja przy pierwszym uruchomieniu).</p>
+  <p class="sub">Wpisz dane auta oraz swoją opinię (np. „brałem w wynajem”). Opinie są zapisywane w bazie MySQL (AwardSpace).</p>
 
   <div class="grid">
-    <!-- FORM -->
     <div class="card">
-      <div class="hd"><strong>Wyślij opinię</strong></div>
+      <div class="hd"><strong>Dodaj opinię</strong></div>
       <div class="bd">
         <form id="reviewForm">
-          <div class="row">
-            <div style="grid-column:span 6">
-              <label>Marka</label>
-              <input name="make" required placeholder="Np. Toyota" />
-            </div>
-            <div style="grid-column:span 6">
-              <label>Model</label>
-              <input name="model" required placeholder="Np. Corolla" />
-            </div>
+          <div class="row cols-2">
+            <div class="field"><label>Marka</label><input name="make" required placeholder="np. Toyota" /></div>
+            <div class="field"><label>Model</label><input name="model" required placeholder="np. Corolla" /></div>
           </div>
-          <div class="row">
-            <div style="grid-column:span 4">
-              <label>Rok</label>
-              <input name="year" type="number" min="1980" max="2099" required />
-            </div>
-            <div style="grid-column:span 4">
-              <label>Rodzaj paliwa</label>
-              <select name="fuel">
-                <option value="petrol">Benzyna</option>
-                <option value="diesel">Diesel</option>
-                <option value="hybrid">Hybryda</option>
-                <option value="electric">Elektryczny</option>
-              </select>
-            </div>
-            <div style="grid-column:span 4">
-              <label>Gdzie używałeś</label>
-              <select name="usage">
-                <option value="owned">Własny samochód</option>
-                <option value="rented">Wynajem</option>
-                <option value="testdrive">Jazda próbna</option>
-                <option value="other">Inne</option>
-              </select>
-            </div>
+          <div class="row cols-4">
+            <div class="field"><label>Rok</label><input name="year" type="number" min="1980" max="2099" required /></div>
+            <div class="field"><label>Rodzaj paliwa</label><select name="fuel"><option value="petrol">Benzyna</option><option value="diesel">Diesel</option><option value="hybrid">Hybryda</option><option value="electric">Elektryczny</option></select></div>
+            <div class="field"><label>Sposób użytkowania</label><select name="usage"><option value="owned">Własny samochód</option><option value="rented">Wynajem</option><option value="testdrive">Jazda próbna</option><option value="other">Inne</option></select></div>
+            <div class="field"><label>Skrzynia biegów</label><select name="gearbox"><option value="manual">Manual</option><option value="auto">Automat</option></select></div>
           </div>
-
-          <div class="row">
-            <div style="grid-column:span 12">
-              <label>Ocena (1–5)</label>
-              <div class="stars" id="stars" aria-label="Wybierz ocenę">
-                <span class="star" data-v="1">☆</span>
-                <span class="star" data-v="2">☆</span>
-                <span class="star" data-v="3">☆</span>
-                <span class="star" data-v="4">☆</span>
-                <span class="star" data-v="5">☆</span>
-              </div>
-              <input name="rating" id="rating" type="number" min="1" max="5" value="5" hidden />
-            </div>
+          <div class="row cols-2">
+            <div class="field"><label>Stan pojazdu</label><select name="condition"><option value="excellent">Bardzo dobry</option><option value="good" selected>Dobry</option><option value="fair">Średni</option><option value="poor">Słaby</option></select></div>
+            <div class="field"><label>Typ nadwozia</label><select name="bodytype"><option value="sedan">Sedan</option><option value="kombi">Kombi</option><option value="hatchback">Hatchback</option><option value="suv">SUV</option><option value="coupe">Coupé</option><option value="van">Van</option></select></div>
           </div>
-
-          <div class="row">
-            <div style="grid-column:span 12">
-              <label>Twój komentarz</label>
-              <textarea name="comment" placeholder="Np.: Brałem w najem na 3 dni..."></textarea>
-            </div>
-          </div>
-
-          <div class="row">
-            <div style="grid-column:span 6">
-              <label>Imię (opcjonalnie)</label>
-              <input name="author" placeholder="Anonim" />
-            </div>
-            <div style="grid-column:span 6">
-              <label>Data</label>
-              <input name="date" type="date" />
-            </div>
-          </div>
-
-          <div class="btns">
-            <button type="submit">Zapisz opinię</button>
-          </div>
+          <div class="row cols-1"><div class="field"><label>Ocena (1–5)</label><div class="stars" id="stars"><span class="star" data-v="1">☆</span><span class="star" data-v="2">☆</span><span class="star" data-v="3">☆</span><span class="star" data-v="4">☆</span><span class="star" data-v="5">☆</span></div><input name="rating" id="rating" type="number" min="1" max="5" value="5" hidden /></div></div>
+          <div class="row cols-1"><div class="field"><label>Twoja opinia</label><textarea name="comment" placeholder="Np.: Brałem w wynajem na 3 dni. Miękkie zawieszenie, skrzynia precyzyjna, spalanie ~6.5 l/100 km."></textarea></div></div>
+          <div class="row cols-2"><div class="field"><label>Imię (opcjonalnie)</label><input name="author" placeholder="Anonim" /></div><div class="field"><label>Data</label><input name="date" type="date" /></div></div>
+          <div class="btns"><button type="submit">Zapisz opinię</button><button class="btn-ghost" type="button" id="clearAll">Wyczyść wszystkie opinie</button></div>
         </form>
       </div>
     </div>
-
-    <!-- LIST -->
-    <div class="card">
+    <div class="card list-card">
       <div class="hd"><strong>Moje opinie</strong></div>
-      <div class="bd">
-        <div id="list" class="list">
-          <div class="empty">Na razie brak żadnej opinii.</div>
-        </div>
-      </div>
+      <div class="bd"><div id="list" class="list"><div class="empty">Na razie brak opinii.</div></div></div>
     </div>
   </div>
 </div>
-
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
